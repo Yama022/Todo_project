@@ -67,10 +67,57 @@
   width: 21.8%;
   background-color: white;
   color: black;
-  padding: 1rem;
+  padding: .5rem;
   border-radius: 5px;
 }
 
+.list li {
+  list-style: circle;
+  font-size: 2.5rem;
+}
+
+li:hover .buttonDelete {
+  visibility: visible;
+}
+
+.buttonDelete {
+  position: absolute;
+  top: 2rem;
+  right: 1.5rem;
+  border: none;
+  background-color: transparent;
+  font-size: 1.7rem;
+  color: black;
+  visibility: hidden;
+}
+
+.listBack {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 .5rem;
+}
+
+.listBack p {
+  font-size: .9rem;
+}
+
+.listBack button:hover {
+  color: blue;
+  cursor: grab;
+}
+
+.listBackButtons {
+  margin-top: .6rem;
+}
+
+.listBack button {
+  border: none;
+  background-color: transparent;
+  font-size: 1.2rem;
+  color: black;
+  /* margin-left: 1rem; */
+}
 
 @media (max-width: 600px) {
 

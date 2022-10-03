@@ -15,6 +15,12 @@ export default function Home() {
     document.getElementById('todoInput').value = ''
   }
 
+  const handleDeleteTodo = (e) => {
+    const todoId = e.target.id
+    const newTodoList = todoList.filter((todo, index) => index != todoId)
+    setTodoList(newTodoList)
+  }
+
   useEffect(() => {
   }, [todoList])
   
@@ -55,9 +61,21 @@ export default function Home() {
       <div className={styles.list}>
         <ul>
           {todoList.map((todo, index) => (
-            <li key={index}>{todo}</li>
+            <li key={index}>
+              {todo}
+              <button key={index} className={styles.buttonDelete} onClick={handleDeleteTodo}>X</button>
+            </li>
           ))}
         </ul>
+        <div className={styles.listBack}>
+          <p>{todoList.length} items left</p>
+          <div className={styles.listBackButtons}>
+            <button>All</button>
+            <button>Active</button>
+            <button>Completed</button>
+          </div>
+          <button>Clear Completed</button>
+        </div>
       </div>
     </div>
     
