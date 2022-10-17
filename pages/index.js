@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import bgDesktopLight from '../public/images/bg-desktop-light.jpg'
 import moon from '../public/images/icon-moon.svg'
-import styles from '../styles/Home.module.css'
+import styles from '../styles/Home.module.scss'
 
 export default function Home() {
 
@@ -15,10 +15,22 @@ export default function Home() {
     document.getElementById('todoInput').value = ''
   }
 
-  const handleDeleteTodo = (e) => {
-    const todoId = e.target.id
-    const newTodoList = todoList.filter((todo, index) => index != todoId)
-    setTodoList(newTodoList)
+  const handleDeleteTodo = () => {
+    const todoListCopy = [...todoList]
+
+    todoListCopy.map((todo, index) => {
+      if (todo === todoList[index]) {
+        todoListCopy.splice(index, 1)
+        setTodoList(todoListCopy)
+      }
+    })
+  }
+
+  const handleClickButton = (e) => {
+    const todoIndex = e.target.id
+    const todoListCopy = [...todoList]
+    todoListCopy.splice(todoIndex, 1)
+    setTodoList(todoListCopy)
   }
 
   useEffect(() => {
@@ -45,7 +57,7 @@ export default function Home() {
 
             <div className={styles.input}>
               <form method="get" onSubmit={handleSubmit}>
-              <button className={styles.button}></button>
+              <button className={styles.input.button} ></button>
               <input
                 type="text"
                 placeholder="Create a new todo..."
@@ -59,14 +71,17 @@ export default function Home() {
       </div>
 
       <div className={styles.list}>
-        <ul>
-          {todoList.map((todo, index) => (
-            <li key={index}>
-              {todo}
-              <button key={index} className={styles.buttonDelete} onClick={handleDeleteTodo}>X</button>
-            </li>
-          ))}
-        </ul>
+          <ul>
+
+            {todoList.map((todo, index) => (
+              <div className={styles.todoList} key={index} >
+                <li id="liItem" onClick={handleClickButton} value={todo}>
+                  {todo}
+                  <button id={index} className={styles.buttonDelete} onClick={handleDeleteTodo}>✖️</button>
+                </li>
+              </div>
+            ))}
+          </ul>
         <div className={styles.listBack}>
           <p>{todoList.length} items left</p>
           <div className={styles.listBackButtons}>
